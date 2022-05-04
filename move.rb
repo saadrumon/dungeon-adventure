@@ -10,12 +10,6 @@ class Move
     set_initial_positions
   end
 
-  def position
-    puts "X COORD: #{@x_coord}"
-    puts "Y COORD: #{@y_coord}"
-    puts "Z COORD: #{@z_coord}"
-  end
-
   def begin
     utter_start
   end

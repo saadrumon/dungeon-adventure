@@ -30,8 +30,6 @@ class Game
       when "exit"
         @move.end
         break
-      when "pos"
-        @move.position
       else
         @move.fallback
       end
