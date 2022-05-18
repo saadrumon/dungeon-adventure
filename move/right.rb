@@ -1,0 +1,2 @@
+class Right
+end
