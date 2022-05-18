@@ -21,7 +21,7 @@ class Game
     GameHelper::utter("START")
     GameHelper::utter("CHOICE", @valid_options)
 
-    grid = []
+    grid = nil
     while input = Readline.readline("> ", true).strip.downcase
       if input.eql? "exit"
         GameHelper::utter("EXIT")
@@ -65,5 +65,7 @@ class Game
   end
 end
 
-game = Game.new
-game.play
+if $PROGRAM_NAME == __FILE__
+  game = Game.new
+  game.play
+end 

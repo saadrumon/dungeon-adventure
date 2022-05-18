@@ -1,2 +1,1 @@
-require './config.rb'
-require './move.rb'
+require_relative '../game.rb'
