@@ -19,9 +19,9 @@ module GameHelper
 
     if utter_type.eql? "CHOICE" 
       puts message.blue + " (#{ options.join('/') })".red if options.any?
-    elsif %w[LEFT RIGHT FORWARD BACKWARD].include? utter_type
+    elsif %w[LEFT RIGHT FORWARD BACKWARD HIT].include? utter_type
       puts message.green
-    elsif %w[DANGER FALLBACK HIT RUN].include? utter_type
+    elsif %w[DANGER FALLBACK RUN EXIT].include? utter_type
       puts message.red
     else
       puts message.yellow

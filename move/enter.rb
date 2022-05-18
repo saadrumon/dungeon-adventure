@@ -1,11 +1,9 @@
 class Enter
   def move(grid)
     @grid = grid
-    @total_rows = @grid.length
-    @total_cols = @grid[0].length
-
     GameHelper::utter("WELCOME")
     
+    set_grid
     set_enemy_position
     set_initial_player_position
     
@@ -13,6 +11,18 @@ class Enter
   end
 
   private
+
+  def set_grid
+    @total_rows = rand 2..ENV["MAX_ROW"].to_i
+    @total_cols = rand 2..ENV["MAX_COL"].to_i
+
+    @grid = []
+    @total_rows.times do |row|
+      arr = []
+      @total_cols.times { |col| arr << GameHelper::EMPTY_CELL }
+      @grid << arr
+    end
+  end
 
   def set_enemy_position
     row_enemy = rand 0...@total_rows

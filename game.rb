@@ -15,50 +15,36 @@ class Game
     @backward = Backward.new
     @enter = Enter.new
     @valid_options = %w[enter exit]
-
-    set_grid
   end
 
   def play
     GameHelper::utter("START")
     GameHelper::utter("CHOICE", @valid_options)
 
+    grid = []
     while input = Readline.readline("> ", true).strip.downcase
       if input.eql? "exit"
         GameHelper::utter("EXIT")
         break
       elsif @valid_options.include? input
-        @grid, is_enemy_cell = instance_variable_get("@#{input}").move(@grid)
+        grid, is_enemy_cell = instance_variable_get("@#{input}").move(grid)
 
         if is_enemy_cell
           process_final_action
-          @valid_options = %[enter exit]
         else
-          @valid_options = GameHelper::get_options(@grid)
+          @valid_options = GameHelper::get_options(grid)
         end
 
         GameHelper::utter("CHOICE", @valid_options)
       else
         GameHelper::utter("FALLBACK")
       end
-      puts @grid.inspect
+      puts grid.inspect
     end
     
   end
 
   private
-
-  def set_grid
-    total_rows = rand 2..ENV["MAX_ROW"].to_i
-    total_cols = rand 2..ENV["MAX_COL"].to_i
-
-    @grid = []
-    total_rows.times do |row|
-      arr = []
-      total_cols.times { |col| arr << GameHelper::EMPTY_CELL }
-      @grid << arr
-    end
-  end
 
   def process_final_action
     GameHelper::utter("DANGER")
@@ -69,6 +55,7 @@ class Game
       if @valid_options.include? input
         GameHelper::utter(input.upcase)
         GameHelper::utter("RESTART")
+        @valid_options = %w[enter exit]
         break
       else
         GameHelper::utter("FALLBACK")
