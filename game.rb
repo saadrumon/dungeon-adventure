@@ -39,7 +39,11 @@ class Game
       else
         GameHelper::utter("FALLBACK")
       end
-      puts grid.inspect
+
+      if ENV["ENVIRONMENT"].eql? "Development"
+        puts grid.inspect
+      end
+
     end
     
   end
